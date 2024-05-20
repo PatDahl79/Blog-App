@@ -127,15 +127,15 @@ function Dashboard () {
                                         </th>
                                         {/* Blog Title  */}
                                         <td style={{ color: mode === 'dark' ? 'white' : 'black' }} className="px-6 py-4">
-                                            {'React Introduction'}
+                                            {'Blogs for ADHD'}
                                         </td>
                                         {/* Blog Category  */}
                                         <td style={{ color: mode === 'dark' ? 'white' : 'black' }} className="px-6 py-4">
-                                            {'reactjs'}
+                                            {'General blog'}
                                         </td>
                                         {/* Blog Date  */}
                                         <td style={{ color: mode === 'dark' ? 'white' : 'black' }} className="px-6 py-4">
-                                            {'Jul 25, 2023'}
+                                            {'Jul 30, 2023'}
                                         </td>
                                         {/* Delete Blog  */}
                                         <td style={{ color: mode === 'dark' ? 'white' : 'black' }} className="px-6 py-4">

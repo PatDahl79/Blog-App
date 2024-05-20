@@ -13,6 +13,7 @@
   "dependencies": {
     "@material-tailwind/react": "^2.1.9",
     "@tinymce/tinymce-react": "^5.0.1",
+    "firebase": "^10.12.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
@@ -20,6 +21,7 @@
     "react-router-dom": "^6.23.1"
   },
   "devDependencies": {
+    "@netlify/plugin-lighthouse": "^6.0.0",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
