@@ -4,20 +4,66 @@ import { BsFillArrowLeftCircleFill } from "react-icons/bs"
 import myContext from '../../../context/data/myContext';
 import { Link } from "react-router-dom";
 import { Button, Typography,} from "@material-tailwind/react";
+import { Timestamp } from 'firebase/firestore';
+import { storage } from '../../../firebase/FirebaseConfig';
 
 
 function CreateBlog() {
     const context = useContext(myContext);
     const { mode } = context;
 
-    const [blogs, setBlogs] = useState('');
+    const [blogs, setBlogs] = useState([{
+        title :"",
+        category :"",
+        content :"",
+        time : Timestamp.now(),
+    }]);
     const [thumbnail, setthumbnail] = useState();
 
     const [text, settext] = useState('');
     console.log("Value: ",);
     console.log("text: ", text);
 
-    console.log (blogs);
+    // console.log (blogs);
+
+    const addPost = async () => {
+        if (blogs.title === "" || blogs.category === "" || blogs.content === "" || blogs.thumbnail === "") {
+            toast.error('Please Fill All Fields');
+        }
+        // console.log(blogs.content)
+        uploadImage()
+}
+
+    const uploadImage = () => {
+        if (!thumbnail) return;
+        const imageRef = ref(storage, `blogimage/${thumbnail.name}`);
+        uploadBytes(imageRef, thumbnail).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((url) => {
+                const productRef = collection(fireDb, "blogPost")
+                try {
+                    addDoc(productRef, {
+                        blogs,
+                        thumbnail: url,
+                        time: Timestamp.now(),
+                        date: new Date().toLocaleString(
+                            "sv-SE",
+                            {
+                                month: "short",
+                                day: "2-digit",
+                                year: "numeric",
+                            }
+                        )
+                    })
+                    navigate('/dashboard')
+                    toast.success('Post Added Successfully');
+                } 
+                catch (error) {
+                    toast.error(error)
+                    console.log(error)
+                }
+            });
+        });
+    }
 
     // Create markup function 
     function createMarkup(c) {
@@ -104,6 +150,8 @@ function CreateBlog() {
                                 : 'rgb(226, 232, 240)'
                         }}
                         name="title"
+                        value={blogs.title}
+                        onChange={(e) => setBlogs ({...blogs, title : e. target.value })}
                     />
                 </div>
 
@@ -122,6 +170,8 @@ function CreateBlog() {
                                 : 'rgb(226, 232, 240)'
                         }}
                         name="category"
+                        value={blogs.category}
+                        onChange={(e) => setBlogs ({...blogs, category : e. target.value })}
                     />
                 </div>
 
@@ -129,19 +179,28 @@ function CreateBlog() {
                 <Editor
                     apiKey='1b62n1pyl5tq5e6w4whjyn0n3dxzyk1y95lq1avz870xt2bv'
                     onEditorChange={(newValue, editor) => {
-                        setBlogs({ blogs, content: newValue });
+                        setBlogs({ ...blogs, content: newValue });
                         settext(editor.getContent({ format: 'text' }));
                     }}
                     onInit={(evt, editor) => {
                         settext(editor.getContent({ format: 'text' }));
                     }}
                     init={{
-                        plugins: 'a11ychecker advcode advlist advtable anchor autocorrect autolink autoresize autosave casechange charmap checklist code codesample directionality editimage emoticons export footnotes formatpainter fullscreen help image importcss inlinecss insertdatetime link linkchecker lists media mediaembed mentions mergetags nonbreaking pagebreak pageembed permanentpen powerpaste preview quickbars save searchreplace table tableofcontents template  tinydrive tinymcespellchecker typography visualblocks visualchars wordcount'
+                        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+                        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                        tinycomments_mode: 'embedded',
+                        tinycomments_author: 'Author name',
+                        mergetags_list: [
+                        { value: 'First.Name', title: 'First Name' },
+                        { value: 'Email', title: 'Email' },
+                        ],
+                        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
                     }}
+                    initialValue="Write Your message here!"
                 />
 
                 {/* Five Submit Button  */}
-                <Button className=" w-full mt-5"
+                <Button className=" w-full mt-5" onClick={addPost}
                     style={{
                         background: mode === 'dark'
                             ? 'rgb(226, 232, 240)'

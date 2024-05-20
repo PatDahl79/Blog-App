@@ -1,10 +1,9 @@
 import React from 'react'
 
-function BlogInfo () {
+const BlogInfo = () => {
   return (
     <div>BlogInfo</div>
   )
 }
-
 
 export default BlogInfo;
