@@ -2,8 +2,10 @@ import React from 'react'
 
 const BlogInfo = () => {
   return (
-    <div>BlogInfo</div>
+    <div>
+      
+    </div>
   )
 }
 
-export default BlogInfo;
+export default BlogInfo
