@@ -22,7 +22,7 @@
     "react-router-dom": "^6.23.1"
   },
   "devDependencies": {
-    "@netlify/plugin-lighthouse": "^6.0.0",
+    "@netlify/plugin-lighthouse": "^3.0.0",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Button } from '@material-tailwind/react';
 import { Link, useNavigate } from 'react-router-dom';
 import Image from '../../../assets/Brain_light.png';
@@ -8,7 +8,7 @@ import myContext from '../../../context/data/myContext';
 
 function Dashboard () {
     const context = useContext( myContext);
-    const { mode, getAllBlog } = context;
+    const { mode, getAllBlog, deleteBlogs } = context;
     const navigate = useNavigate();
 
     console.log (getAllBlog)
@@ -17,6 +17,8 @@ function Dashboard () {
         localStorage.clear('admin');
         navigate('/')
     }
+
+    useEffect(() => { window.scrollTo(0, 0)}, [])
 
     return (
         <Layout>
@@ -126,7 +128,7 @@ function Dashboard () {
                                 {/* tbody  */}
                                 {getAllBlog.length > 0 ? <>
                                         {getAllBlog.map((item, index) => {
-                                            const {thumbnail, date} = item;
+                                            const {thumbnail, date, id} = item;
                                             console.log(item);
                                             return (
                                                 <tbody>
@@ -153,16 +155,16 @@ function Dashboard () {
                                                         <td style={{ color: mode === 'dark' ? 'white' : 'black' }} className="px-6 py-4">
                                                             {date}
                                                         </td>
-                                                        {/* Delete Blog  */}
-                                                        <td style={{ color: mode === 'dark' ? 'white' : 'black' }} className="px-6 py-4">
-                                                            <button className=' px-4 py-1 rounded-lg text-white font-bold bg-red-500'>
-                                                            </button>
+                                                         {/* Delete Blog  */}
+                                                         <td onClick={()=> deleteBlogs(id)} style={{ color: mode === 'dark' ? 'white' : 'black' }} className="px-6 py-4">
+                                                            <button className=' px-4 py-1 rounded-lg text-white font-bold bg-red-500'>Delete</button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
-                                            )
-                                        })}</> : <> <h1>Not Found</h1></> 
-                                    }
+                                                )
+                                            })}
+                                            </> : <> <h1>Not Found</h1></> 
+                                        }
                             </table>
                         </div>
                     </div>

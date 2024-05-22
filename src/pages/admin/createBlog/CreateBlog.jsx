@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { BsFillArrowLeftCircleFill } from "react-icons/bs"
 import myContext from '../../../context/data/myContext';
@@ -32,7 +32,9 @@ function CreateBlog() {
         }
         // console.log(blogs.content)
         uploadImage()
-}
+    }
+
+    useEffect(() => { window.scrollTo(0, 0) }, [])
 
     const uploadImage = () => {
         if (!thumbnail) return;
@@ -213,7 +215,7 @@ function CreateBlog() {
 
                 {/* Six Preview Section  */}
                 <div className="">
-                    <h1 className=" text-center mb-3 text-2xl">Preview</h1>
+                    <h2 className=" text-center mb-3 text-2xl">Preview</h2>
                     <div className="content">
                         <div
                             className={`[&> h1]:text-[32px] [&>h1]:font-bold  [&>h1]:mb-2.5

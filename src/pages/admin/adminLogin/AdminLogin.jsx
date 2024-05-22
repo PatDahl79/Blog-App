@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Card, CardHeader, CardBody, Input, Button, Typography, } from "@material-tailwind/react";
 import myContext from "../../../context/data/myContext";
 import { useNavigate } from "react-router";
@@ -32,6 +32,8 @@ export default function AdminLogin() {
             console.log(error)
         }
     }
+
+    useEffect(() => { window.scrollTo(0, 0) }, [])
 
     return (
         <div className="flex justify-center items-center h-screen">

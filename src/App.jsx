@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Routes, Navigate, } from "react-router-dom";
 import Home from "./pages/home/Home";
-import Blog from "./pages/blog/Blog";
 import NoPage from "./pages/nopage/NoPage";
 import BlogInfo from "./pages/blogInfo/BlogInfo";
 import AdminLogin from "./pages/admin/adminLogin/AdminLogin";
@@ -16,7 +15,6 @@ function App() {
       <Router>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/blog" element={<Blog />} />
             <Route path="/allblogs" element={<AllBlogs />} />
             <Route path="/bloginfo/:id" element={<BlogInfo />} />
             <Route path="/adminlogin" element={<AdminLogin />} />
