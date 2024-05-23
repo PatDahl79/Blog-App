@@ -1,10 +1,14 @@
 import React from 'react'
 
-function BlogInfo () {
+const BlogInfo = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+}, [])
   return (
-    <div>BlogInfo</div>
+    <div>
+      
+    </div>
   )
 }
 
-
-export default BlogInfo;
+export default BlogInfo

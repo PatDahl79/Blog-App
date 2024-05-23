@@ -1,12 +1,12 @@
 import React from 'react'
+import Navbar from '../navbar/Navbar'
 import Footer from '../footer/Footer'
-import CustomNavbar from '../navbar/Navbar'
 
 function Layout({ children }) {
     return (
         <div>
             {/* Navbar  */}
-            <CustomNavbar />
+            <Navbar />
 
             {/* main Content  */}
             <div className="content min-h-screen">

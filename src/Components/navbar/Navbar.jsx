@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Navbar as MTNavbar, Typography, IconButton, Avatar, Collapse, } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
-import { AiOutlineShareAlt, AiOutlineSearch } from 'react-icons/ai';
 import myContext from "../../context/data/myContext";
 import Logo from '../../assets/Logo-dark.png';
 import Profile from '../../assets/Women_light_icon.png';
@@ -13,6 +12,8 @@ function CustomNavbar() {
 
     const context = useContext(myContext);
     const { mode, toggleMode } = context;
+
+    const admin = localStorage.getItem('admin');
 
     // All NavList 
     const navList = (
@@ -94,20 +95,24 @@ function CustomNavbar() {
                         </div>
 
                         {/* Admin Profile Pic */}
-                        <Link to={'/dashboard'}>
-                            <Avatar
-                                key={1}
-                                src={Profile}
-                                alt="avatar"
-                                withBorder={true}
-                                className="p-0.5 text-red-500 w-10 h-10"
-                                style={{
-                                    border: mode === 'dark'
-                                        ? '2px solid rgb(226, 232, 240)'
-                                        : '2px solid rgb(30, 41, 59)'
-                                }}
-                            />
-                        </Link>
+                        <div>
+                            {admin ?
+                            <Link to={'/dashboard'}>
+                                <Avatar
+                                    key={1}
+                                    src={Profile}
+                                    alt="avatar"
+                                    withBorder={true}
+                                    className="p-0.5 text-red-500 w-10 h-10"
+                                    style={{
+                                        border: mode === 'dark'
+                                            ? '2px solid rgb(226, 232, 240)'
+                                            : '2px solid rgb(30, 41, 59)'
+                                    }}
+                                />
+                            </Link> 
+                            : "" }
+                        </div>
 
                         {/* Dark and Light Button */}
                         <div>
