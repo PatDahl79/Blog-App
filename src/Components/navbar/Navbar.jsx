@@ -1,11 +1,5 @@
 import React, { useState, useContext } from "react";
-import {
-    Navbar as MTNavbar,
-    Typography,
-    IconButton,
-    Avatar,
-    Collapse,
-} from "@material-tailwind/react";
+import { Navbar as MTNavbar, Typography, IconButton, Avatar, Collapse, } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { AiOutlineShareAlt, AiOutlineSearch } from 'react-icons/ai';
 import myContext from "../../context/data/myContext";
