@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
@@ -22,3 +21,16 @@ const auth = getAuth(app);
 const storage = getStorage(app);
 
 export {fireDb, auth, storage}
+
+function MyComponent() {
+  const history = useHistory();
+  
+  // Use history.push() to navigate
+  const handleButtonClick = () => {
+    history.push("/some-route");
+  };
+
+  return (
+    <button onClick={handleButtonClick}>Route</button>
+  );
+}

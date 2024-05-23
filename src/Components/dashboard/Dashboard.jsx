@@ -1,25 +1,25 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react'
+import Layout from '../../../components/layout/Layout'
+import myContext from '../../../context/data/myContext';
 import { Button } from '@material-tailwind/react';
 import { Link, useNavigate } from 'react-router-dom';
-import Image from '../../../assets/Brain_light.png';
-import Layout from '../../../Components/layout/Layout';
-import myContext from '../../../context/data/myContext';
+import { useNavigate } from "react-router";
 
+function Dashboard() {
+    const context = useContext(myContext);
+    const { mode } = context;
 
-function Dashboard () {
-    const context = useContext( myContext);
-    const { mode, getAllBlog, deleteBlogs } = context;
     const navigate = useNavigate();
 
-    console.log (getAllBlog)
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
+    //* Logout Function 
     const logout = () => {
-        localStorage.clear('admin');
+        localStorage.clear();
         navigate('/')
     }
-
-    useEffect(() => { window.scrollTo(0, 0)}, [])
-
     return (
         <Layout>
             <div className="py-10">
@@ -27,26 +27,28 @@ function Dashboard () {
                     className="flex flex-wrap justify-start items-center lg:justify-center gap-2 lg:gap-10 px-4 lg:px-0 mb-8">
                     <div className="left">
                         <img
-                            className=" w-40 h-40  object-cover rounded-full border-2 border-blue-600 p-1"
-                            src={Image} alt="profile"
+                            className=" w-40 h-40  object-cover rounded-full border-2 border-pink-600 p-1"
+                            src={'https://cdn-icons-png.flaticon.com/128/3135/3135715.png'} alt="profile"
                         />
                     </div>
                     <div className="right">
                         <h1
                             className='text-center font-bold text-2xl mb-2'
                             style={{ color: mode === 'dark' ? 'white' : 'black' }}
-                        > Pat Dahl
+                        >
+                            Pat Dahl
                         </h1>
+
                         <h2
                             style={{ color: mode === 'dark' ? 'white' : 'black' }} className="font-semibold">
-                                Admin
+                            Software Developer
                         </h2>
                         <h2
-                            style={{ color: mode === 'dark' ? 'white' : 'black' }} className="font-semibold">admin@bloggi.com
+                            style={{ color: mode === 'dark' ? 'white' : 'black' }} className="font-semibold">knupadhyay784@gmail.com
                         </h2>
                         <h2
                             style={{ color: mode === 'dark' ? 'white' : 'black' }} className="font-semibold">
-                            <span>Total Blog : </span>  1
+                            <span>Total Blog : </span>  15
                         </h2>
                         <div className=" flex gap-2 mt-2">
                             <Link to={'/createblog'}>
@@ -61,12 +63,14 @@ function Dashboard () {
                                                 : 'white'
                                         }}
                                         className='px-8 py-2'
-                                    >   Create Blog
+                                    >
+                                        Create Blog
                                     </Button>
                                 </div>
                             </Link>
                             <div className="mb-2">
-                                <Button onClick={logout}
+                                <Button
+                                    onClick={logout}
                                     style={{
                                         background: mode === 'dark'
                                             ? 'rgb(226, 232, 240)'
@@ -76,19 +80,22 @@ function Dashboard () {
                                             : 'white'
                                     }}
                                     className='px-8 py-2'
-                                >  Logout
+                                >
+                                    Logout
                                 </Button>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 {/* Line  */}
                 <hr className={`border-2
-                 ${mode === 'dark'
-                     ? 'border-gray-300'
-                     : 'border-gray-400'}` 
-                 }
+                    ${mode === 'dark'
+                            ? 'border-gray-300'
+                            : 'border-gray-400'}`
+                    }
                 />
+
                 {/* Table  */}
                 <div className="">
                     <div className=' container mx-auto px-4 max-w-7xl my-5' >
@@ -126,53 +133,50 @@ function Dashboard () {
                                 </thead>
 
                                 {/* tbody  */}
-                                {getAllBlog.length > 0 ? <>
-                                        {getAllBlog.map((item, index) => {
-                                            const {thumbnail, date, id} = item;
-                                            console.log(item);
-                                            return (
-                                                <tbody>
-                                                    <tr className=" border-b-2" style={{ background: mode === 'dark' ? 'rgb(30, 41, 59)' : 'white' }}>
-                                                        {/* S.No   */}
-                                                        <td style={{ color: mode === 'dark' ? 'white' : 'black' }} className="px-6 py-4">
-                                                            {index + 1}.
-                                                        </td>
-                                                        {/* Blog Thumbnail  */}
-                                                        <th style={{ color: mode === 'dark' ? 'white' : 'black' }} scope="row" className="px-6 py-4 font-medium ">
-                                                            {/* thumbnail  */}
-                                                            <img className='w-16 rounded-lg' 
-                                                            src={thumbnail} alt="thumbnail" />
-                                                        </th>
-                                                        {/* Blog Title  */}
-                                                        <td style={{ color: mode === 'dark' ? 'white' : 'black' }} className="px-6 py-4">
-                                                            {item.blogs.title}
-                                                        </td>
-                                                        {/* Blog Category  */}
-                                                        <td style={{ color: mode === 'dark' ? 'white' : 'black' }} className="px-6 py-4">
-                                                            {item.blogs.category}
-                                                        </td>
-                                                        {/* Blog Date  */}
-                                                        <td style={{ color: mode === 'dark' ? 'white' : 'black' }} className="px-6 py-4">
-                                                            {date}
-                                                        </td>
-                                                         {/* Delete Blog  */}
-                                                         <td onClick={()=> deleteBlogs(id)} style={{ color: mode === 'dark' ? 'white' : 'black' }} className="px-6 py-4">
-                                                            <button className=' px-4 py-1 rounded-lg text-white font-bold bg-red-500'>Delete</button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                                )
-                                            })}
-                                            </> : <> <h1>Not Found</h1></> 
-                                        }
+                                <tbody>
+                                    <tr className=" border-b-2" style={{ background: mode === 'dark' ? 'rgb(30, 41, 59)' : 'white' }}>
+                                        {/* S.No   */}
+                                        <td style={{ color: mode === 'dark' ? 'white' : 'black' }} className="px-6 py-4">
+                                            {'1.'}
+                                        </td>
+
+                                        {/* Blog Thumbnail  */}
+                                        <th style={{ color: mode === 'dark' ? 'white' : 'black' }} scope="row" className="px-6 py-4 font-medium ">
+                                            {/* thumbnail  */}
+                                            <img className='w-16 rounded-lg' src={'https://firebasestorage.googleapis.com/v0/b/blog-fea71.appspot.com/o/blogimage%2FReact%20Introduction.png?alt=media&token=1ba7496b-2cbc-450c-ab1a-57e19882dc76'} alt="thumbnail" />
+                                        </th>
+
+                                        {/* Blog Title  */}
+                                        <td style={{ color: mode === 'dark' ? 'white' : 'black' }} className="px-6 py-4">
+                                            {'React Introduction'}
+                                        </td>
+
+                                        {/* Blog Category  */}
+                                        <td style={{ color: mode === 'dark' ? 'white' : 'black' }} className="px-6 py-4">
+                                            {'reactjs'}
+                                        </td>
+
+                                        {/* Blog Date  */}
+                                        <td style={{ color: mode === 'dark' ? 'white' : 'black' }} className="px-6 py-4">
+                                            {'Jul 25, 2023'}
+                                        </td>
+
+                                        {/* Delete Blog  */}
+                                        <td style={{ color: mode === 'dark' ? 'white' : 'black' }} className="px-6 py-4">
+                                            <button className=' px-4 py-1 rounded-lg text-white font-bold bg-red-500'>
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
+
                 </div>
             </div>
-    </Layout>
-  )
+        </Layout>
+    )
 }
 
-
-export default Dashboard;
+export default Dashboard

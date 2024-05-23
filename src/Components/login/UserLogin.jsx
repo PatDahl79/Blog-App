@@ -1,14 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Card, CardHeader, CardBody, Input, Button, Typography, } from "@material-tailwind/react";
+import React, { useContext, useState } from "react";
+import {  Card,  CardHeader,  CardBody, Input, Button, Typography,} from "@material-tailwind/react";
 import myContext from "../../../context/data/myContext";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebase/FirebaseConfig";
-import Image from '../../../assets/Brain_light.png';
 
 
-export default function AdminLogin() {
+export default function UserLogin() {
     const context = useContext(myContext);
     const { mode } = context;
 
@@ -32,8 +31,6 @@ export default function AdminLogin() {
             console.log(error)
         }
     }
-
-    useEffect(() => { window.scrollTo(0, 0) }, [])
 
     return (
         <div className="flex justify-center items-center h-screen">
@@ -62,7 +59,7 @@ export default function AdminLogin() {
                     <div className="mb-4 rounded-full border border-white/10 bg-white/10 p-2 text-white">
                         <div className=" flex justify-center">
                             {/* Image  */}
-                            <img src={Image}className="h-20 w-20"
+                            <img src="https://cdn-icons-png.flaticon.com/128/727/727399.png" className="h-20 w-20"
                             />
                         </div>
                     </div>
@@ -73,7 +70,7 @@ export default function AdminLogin() {
                             ? 'rgb(30, 41, 59)'
                             : 'rgb(226, 232, 240)'
                     }}>
-                        Admin Login
+                        Login
                     </Typography>
                 </CardHeader>
 

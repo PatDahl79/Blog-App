@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Comment = () => {
+const Blog = () => {
   return (
     <div>
-      comment
+      Blog
     </div>
   )
 }
 
-export default Comment
+export default Blog

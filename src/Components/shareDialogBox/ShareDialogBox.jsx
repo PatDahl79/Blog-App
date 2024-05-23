@@ -1,12 +1,9 @@
 import { Fragment, useContext, useState } from "react";
-import {
-    Dialog,
-    DialogBody,
-} from "@material-tailwind/react";
+import { Dialog, DialogBody,} from "@material-tailwind/react";
 import myContext from "../../context/data/myContext";
 import { AiOutlineShareAlt, AiFillLinkedin, AiFillInstagram, AiFillGithub, AiFillFacebook } from 'react-icons/ai';
 
-function ShareDialogBox() {
+export default function ShareDialogBox() {
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => setOpen(!open);
@@ -72,9 +69,3 @@ function ShareDialogBox() {
         </Fragment>
     );
 }
-
-
-export default ShareDialogBox;
-
-
-
